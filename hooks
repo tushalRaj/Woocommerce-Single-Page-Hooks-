@@ -147,3 +147,16 @@ add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
 add_filter( 'woocommerce_cart_item_price', '__return_false' );
 add_filter( 'woocommerce_cart_item_subtotal', '__return_false' );
 
+
+//Add text after Add to cart button
+
+add_action( 'woocommerce_single_product_summary', 'wdo_add_content_after_addtocart_button', 35 );
+function wdo_add_content_after_addtocart_button() {
+    global $product;
+    $product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->id;
+    if($product_id == 481) // here you can add your specific product id whenever you display a custom content
+        echo '
+'.__('<b>Note: Each Entrant Can Buy a Maximum of 10 Tickets</b> <br><b><h4 style="color:#ff2800;">Get these Bola B1 wheels worth £600 for only the price of a coffee!</h4><b>','woocommerce').'
+';
+
+}
